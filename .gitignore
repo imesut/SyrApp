@@ -1,8 +1,14 @@
+.DS_Store
 *.oga
 *.ogg
 *.wav
 keys.py
 .idea/
+*.aiff
+*.flac
+small_scale.py
+log.txt
+sync-request.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -93,3 +99,4 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
