@@ -1,6 +1,7 @@
 from telegram import File
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from keys import telegram_token
+from keys import *
 import logging
 from helpers import *
 from helpers import text
@@ -46,12 +47,18 @@ def voice(bot, update):
     convert_media(voice_name, "flac", 22050)
     voice_name = voice_name + ".flac"
     print voice_name
-    subprocess.call(["gsutil", "cp", voice_name, "gs://syrapp/"+voice_name])
-    subprocess.call(["gsutil", "acl", "ch", "-u", "AllUsers:R", ("gs://syrapp/" + voice_name)])
-    sync_request("FLAC", 22050, "ar", ("gs://syrapp/" + voice_name))
-    text_ar = text()
-    sync_request("FLAC", 22050, "tr", ("gs://syrapp/" + voice_name))
-    text_tr = text()
+    subprocess.call(["gsutil", "cp", voice_name, "gs://syrapp/"+voice_name], shell=True)
+    subprocess.call(["gsutil", "acl", "ch", "-u", "AllUsers:R", ("gs://syrapp/" + voice_name)], shell=True)
+    try:
+        sync_request("FLAC", 22050, "ar", ("gs://syrapp/" + voice_name))
+        text_ar = text()
+    except:
+        text_ar = ["", 0]
+    try:
+        sync_request("FLAC", 22050, "tr", ("gs://syrapp/" + voice_name))
+        text_tr = text()
+    except:
+        text_tr = ["", 0]
     lang = ""
     if float(str(text_ar[1])) > float(str(text_tr[1])):
         lang = "ar"
