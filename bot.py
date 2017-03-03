@@ -29,7 +29,6 @@ def manane(bot, update):
     update.message.reply_text(reply)
     add_log(gelen_mesaj.encode("utf-8"), cevrilmis.encode("utf-8"), isim.encode("utf-8"), str(update.message.chat_id), "text")
 
-
 def message(bot, update):
     user = update.message.from_user
     isim = user.first_name

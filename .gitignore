@@ -7,8 +7,7 @@ keys.py
 *.aiff
 *.flac
 small_scale.py
-
-log.txt
+*.txt
 
 sync-request.json
 
